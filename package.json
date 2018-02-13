@@ -6,7 +6,9 @@
   "scripts": {},
   "author": "Matthias Willemsen",
   "license": "AGPL",
-  "dependencies": {},
+  "dependencies": {
+    "electron": "^1.8.2"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
