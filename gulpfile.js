@@ -38,7 +38,8 @@ gulp.task('serve', ['default'], () => {
   gulp.watch('src/*.html', ['default']).on('change', browserSync.reload);
   gulp.watch('src/img/*', ['default']);
   //gulp.watch('src/js/*.js', ['default']).on('change', browserSync.reload);
-  gulp.watch('src/js/*.ts', ['default']).on('change', browserSync.reload);
+  gulp.watch('src/ts/*.ts', ['default']).on('change', browserSync.reload);
+  gulp.src('src/bin/*.ts').pipe(ts({noImplicitAny: true})).pipe(babel({presets: ['env']})).pipe(gulp.dest('dev/bin'));
   gulp.watch('src/scss/*.scss', ['default']);
 });
 
@@ -47,7 +48,8 @@ gulp.task('default', () => {
   gulp.src('src/*.html').pipe(gulp.dest('dev'));
   gulp.src('src/img/*').pipe(gulp.dest('dev/img'));
   //gulp.src('src/js/*.js').pipe(concat('main.js')).pipe(babel({presets: ['env']})).pipe(gulp.dest('dev/js'));
-  gulp.src('src/js/*.ts').pipe(concat('main.ts')).pipe(ts({noImplicitAny: true})).pipe(babel({presets: ['env']})).pipe(gulp.dest('dev/js'));
+  gulp.src('src/bin/*.ts').pipe(ts({noImplicitAny: true})).pipe(babel({presets: ['env']})).pipe(gulp.dest('dev/bin'));
+  gulp.src('src/ts/*.ts').pipe(concat('main.ts')).pipe(ts({noImplicitAny: true})).pipe(babel({presets: ['env']})).pipe(gulp.dest('dev/js'));
   gulp.src('src/scss/*.scss').pipe(sourcemaps.init()).pipe(sass().on('error', sass.logError)).pipe(sourcemaps.write('./maps')).pipe(gulp.dest('dev/css')).pipe(browserSync.stream());
 });
 
